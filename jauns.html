@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dzimšanas dienas skaitītājs</title>
+    <meta charset="UTF-8">
+    <style>
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gaidot dzimšanas dienu</h1>
+    <hr>
+    <form>
+        <label for="dzimsanasdiena">Dzimšanas datums:</label>
+        <input type="date" id="dzimsanasdiena" name="dzimsanasdiena">
+        <br><br>
+        <button type="button" onclick="calculateDays()">Aprēķināt dienas līdz nākamajai dzimšanas dienai</button>
+    </form>
+    <p id="result"></p>
+    <p>Līdz svētkiem atlikušas <input type="text" id="dienas" name="dienas"> dienas :))</p>
+
+    <script>
+        function calculateDays() {
+            let birthday = new Date(document.getElementById("dzimsanasdiena").value);
+            let today = new Date();
+            let nextBirthday = new Date(today.getFullYear(), birthday.getMonth(), birthday.getDate());
+            if (nextBirthday < today) {
+                nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+            let daysUntil = Math.round((nextBirthday - today) / (1000 * 60 * 60 * 24));
+            document.getElementById("result").innerHTML = "Līdz nākamajai dzimšanas dienai ir " + daysUntil + " dienas.";
+            document.getElementById("dienas").value = daysUntil;
+        }
+    </script>
+</body>
+</html>
